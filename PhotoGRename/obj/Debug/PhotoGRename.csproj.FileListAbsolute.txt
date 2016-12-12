@@ -3,3 +3,8 @@ C:\Delete\PhotoGRename\PhotoGRename\bin\Debug\PhotoGRename.pdb
 C:\Delete\PhotoGRename\PhotoGRename\obj\Debug\PhotoGRename.csprojResolveAssemblyReference.cache
 C:\Delete\PhotoGRename\PhotoGRename\obj\Debug\PhotoGRename.exe
 C:\Delete\PhotoGRename\PhotoGRename\obj\Debug\PhotoGRename.pdb
+C:\work\Prepare-Images-for-Web\PhotoGRename\obj\Debug\PhotoGRename.exe
+C:\work\Prepare-Images-for-Web\PhotoGRename\obj\Debug\PhotoGRename.pdb
+C:\work\Prepare-Images-for-Web\PhotoGRename\obj\Debug\PhotoGRename.csprojResolveAssemblyReference.cache
+C:\work\Prepare-Images-for-Web\PhotoGRename\bin\Debug\PhotoGRename.exe
+C:\work\Prepare-Images-for-Web\PhotoGRename\bin\Debug\PhotoGRename.pdb

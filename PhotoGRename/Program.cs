@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
+using img = PhotoGRename.ImageHelper;
+
 namespace PhotoGRename
 {
     class Program
@@ -14,7 +16,7 @@ namespace PhotoGRename
         [STAThread]
         static void Main(string[] args)
         {
-            Program.GenHtml();
+            Program.CompressResizeGenerateSpriTeAndJson();
             Console.WriteLine("Finished");
             Console.ReadLine();
         }
@@ -73,49 +75,36 @@ namespace PhotoGRename
         }
 
 
-        static void ResizeImages()
-        {
+        
+     
 
-            string[] files = Directory.GetFiles(@"C:\Users\Anthony\Work2\GFSmith\photographic\src\skin\frontend\gfs\default\images\our-products\Folders-and-mounts\OtherPortraitImages", "*.jpeg", SearchOption.AllDirectories);
-            var width = 900;
+        static void CompressResizeGenerateSpriTeAndJson()
+        {
+            string[] files = Directory.GetFiles(@"C:\work\portfolio\www\imgs\brands", "*.png", SearchOption.AllDirectories);
+            var output = new StringBuilder();
+            var imgWidth = 500;
+            var spriteImage = @"C:\work\portfolio\www\imgs\brands\sprite.png";
+            if (File.Exists(spriteImage))  File.Delete(spriteImage);
+          
 
             foreach (var file in files)
             {
-                var ogImg = Image.FromFile(file);
-                if(ogImg.Width > width)
-                {
-                    var newImg = Program.ResizeImageFixedWidth(ogImg, width);
-                    ogImg.Dispose();
-                    newImg.Save(file);
-                    newImg.Dispose();
-                }
-             
+                var fileInfo = new FileInfo(file);
+                Console.WriteLine("Processing image {0}", fileInfo.Name);
+                //img.Trim(file);
+                //img.Resize(file, imgWidth);
+                img.AddToSprite(file, spriteImage);
 
 
+                output.Append("<figure class=\"page\"  style=\"background-image:url(/skin/frontend/gfs/default/images/our-products/Folders-and-mounts/980px-520px/" + new FileInfo(file).Name + ")\"><figcaption></figcaption> </figure>").Append(Environment.NewLine);
 
 
             }
-         
+
+            img.TingPNG(spriteImage);
         }
 
-        static Image ResizeImageFixedWidth(Image imgToResize, int width)
-        {
-            int sourceWidth = imgToResize.Width;
-            int sourceHeight = imgToResize.Height;
 
-            float nPercent = ((float)width / (float)sourceWidth);
-
-            int destWidth = (int)(sourceWidth * nPercent);
-            int destHeight = (int)(sourceHeight * nPercent);
-
-            Bitmap b = new Bitmap(destWidth, destHeight);
-            Graphics g = Graphics.FromImage((Image)b);
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-            g.Dispose();
-
-            return (Image)b;
-        }
+       
     }
 }
